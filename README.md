@@ -96,6 +96,50 @@ It returns:
 - 95% confidence interval
 - Business recommendation
 
+Dashboard Preview
+
+The Streamlit web application provides a simple interface for users to ask natural-language analytics questions and receive AI-generated answers, SQL-based results, visualizations, and A/B testing recommendations.
+
+Streamlit App Interface
+
+The main interface allows users to enter business questions and run analysis through the AI Analytics Agent. Example questions are provided in the sidebar to demonstrate SQL analysis, visualization, and A/B testing capabilities.
+
+⸻
+
+SQL Analysis Result
+
+The agent can answer revenue-related business questions by generating and executing safe SQL queries against the SQLite retail database. The result is summarized into clear business insights for decision-making.
+
+⸻
+
+Monthly Revenue Visualization
+
+The visualization tool generates charts automatically based on user requests. For example, the monthly revenue trend chart helps identify seasonal sales patterns and peak revenue periods.
+
+⸻
+
+A/B Testing Result
+
+The A/B testing tool evaluates experiment performance by calculating conversion rates, lift, p-value, confidence interval, statistical significance, and a business recommendation.
+
+## Dashboard Preview
+
+### Streamlit App Interface
+
+![Streamlit App](screenshots/streamlit_home.png)
+
+### SQL Analysis Result
+
+![SQL Result](screenshots/sql_result.png)
+
+### Monthly Revenue Visualization
+
+![Monthly Revenue Chart](screenshots/monthly_revenue_chart.png)
+
+### A/B Testing Result
+
+![A/B Testing Result](screenshots/ab_test_result.png)
+
 Business Value
 
 This project shows how AI agents can help automate routine analytics workflows. Instead of manually writing SQL, creating charts, and interpreting results, users can ask questions in natural language and receive data-driven answers with business context.
