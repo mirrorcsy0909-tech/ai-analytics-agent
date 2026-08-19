@@ -140,6 +140,22 @@ The A/B testing tool evaluates experiment performance by calculating conversion 
 
 ![A/B Testing Result](screenshots/ab_test_result.png)
 
+## Evaluation Harness
+
+This project includes a lightweight evaluation harness to test the core analytics tools without calling the OpenAI API.
+
+The harness checks:
+
+- SQL query execution
+- SQL safety validation for read-only SELECT queries
+- Automated chart generation
+- A/B testing output structure and statistical results
+
+To run the evaluation harness:
+
+```bash
+python eval/eval_harness.py
+
 Business Value
 
 This project shows how AI agents can help automate routine analytics workflows. Instead of manually writing SQL, creating charts, and interpreting results, users can ask questions in natural language and receive data-driven answers with business context.
@@ -157,3 +173,4 @@ Potential use cases include:
 Notes
 
 The raw dataset, generated SQLite database, API keys, and output charts are not included in this repository for file size and security reasons.
+```
