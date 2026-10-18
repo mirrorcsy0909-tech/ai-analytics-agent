@@ -35,10 +35,16 @@ flowchart TD
 
 ## State and boundaries
 
-- Streamlit keeps conversation checkpoints in process memory. A later question
+- Streamlit keeps a separate graph and checkpoints in each browser session's
+  memory. A later question
   retains messages but resets evidence, artifacts, validation, and retry budgets.
-  A resume continues the interrupted checkpoint. Restarting the process loses
-  those conversations.
+  A resume continues the interrupted checkpoint. Clear conversation discards
+  that session's graph, answer, metrics, input and displayed charts. Reloading
+  the page or restarting the process loses the conversation.
+- The UI displays up to four chart snapshots from its own conversation. A new
+  chart must match successful tool evidence, directory restrictions and the PNG
+  hash before its bytes are captured. The UI never scans the shared output
+  directory for a gallery. Clearing the UI does not delete files on disk.
 - FastAPI assigns each request its own identity and conversation. Its chart
   download registry is bounded, expires entries, and checks file hashes.
 - The SQL layer combines a parsed query policy with SQLite read-only mode,

@@ -44,7 +44,10 @@ invalid inputs, injected tool failures and checkpoint resume. All turns passed
 deterministic checks plus a separate Codex answer review; this is development
 acceptance, not an independent external benchmark. The original 12-task suite
 remains unchanged. See the [coverage, limits and reproduction steps](docs/acceptance.md).
-The complete local offline suite now passes **96/96 tests**.
+The acceptance release passed **96/96 offline tests**. The subsequent Streamlit
+session fix passes **103/103**: each browser conversation owns its graph and
+verified chart snapshots; clearing it starts fresh without affecting another
+session. [Session behavior and checks](docs/streamlit_sessions.md).
 GitHub Actions also passed the Python checks and Docker smoke checks on
 2026-10-18: [verified run](https://github.com/mirrorcsy0909-tech/ai-analytics-agent/actions/runs/39103061043).
 The complete upgrade is available for review in [draft PR #1](https://github.com/mirrorcsy0909-tech/ai-analytics-agent/pull/1).
@@ -121,8 +124,9 @@ docker compose --profile ui up -d
 
 The database loader copies a consistent snapshot into a local Docker data volume;
 it does not modify the source or send it to a cloud service. Containers mount the
-database read-only and receive credentials only at runtime. GitHub Actions are
-configured but have not run remotely because these changes have not been pushed.
+database read-only and receive credentials only at runtime. GitHub Actions run
+the Python checks and Docker smoke checks on pushes and pull requests; the
+acceptance release's verified run is linked above.
 
 ## Project Overview
 

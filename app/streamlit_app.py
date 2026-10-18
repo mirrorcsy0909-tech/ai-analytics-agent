@@ -13,29 +13,14 @@ OUTPUT_DIR = BASE_DIR / "outputs"
 
 from agent.analytics_agent import build_agent, extract_final_text
 from agent.observability import invoke_analysis
+from app.chart_history import capture_charts, merge_chart_history
 
 
-@st.cache_resource
 def load_agent():
-    """
-    Load the LangChain agent once and reuse it.
-    This avoids rebuilding the agent every time Streamlit refreshes.
-    """
-    return build_agent(checkpointer=InMemorySaver())
-
-
-def get_png_files():
-    """
-    Return all PNG charts from the outputs folder.
-    """
-    if not OUTPUT_DIR.exists():
-        return []
-
-    return sorted(
-        OUTPUT_DIR.glob("*.png"),
-        key=lambda file: file.stat().st_mtime,
-        reverse=True,
-    )
+    """Reuse the graph only within its owning browser conversation."""
+    if "analysis_agent" not in st.session_state:
+        st.session_state.analysis_agent = build_agent(checkpointer=InMemorySaver())
+    return st.session_state.analysis_agent
 
 
 def main():
@@ -61,10 +46,11 @@ def main():
     with st.sidebar:
         if st.button("Clear conversation"):
             st.session_state.analysis_thread_id = uuid4().hex
-            st.session_state.pop("last_analysis", None)
-            st.session_state.pop("analysis_interrupted", None)
-            st.session_state.pop("analysis_error", None)
-            st.session_state.pop("last_metrics", None)
+            for key in ("analysis_agent", "last_analysis", "analysis_interrupted",
+                        "analysis_error", "last_metrics", "analysis_charts", "chart_unavailable"):
+                st.session_state.pop(key, None)
+            st.session_state.analysis_question = ""
+        st.caption("Clear starts a fresh conversation and removes its displayed charts.")
         st.header("Example Questions")
 
         st.markdown(
@@ -88,6 +74,7 @@ def main():
         "Ask your question:",
         placeholder="Example: What are the top 5 countries by revenue?",
         height=120,
+        key="analysis_question",
     )
 
     run_button = st.button("Run Analysis")
@@ -101,6 +88,7 @@ def main():
 
         st.session_state.pop("last_analysis", None)
         st.session_state.pop("analysis_error", None)
+        st.session_state.pop("chart_unavailable", None)
         try:
             agent = load_agent()
             config = {"configurable": {"thread_id": st.session_state.analysis_thread_id},
@@ -113,6 +101,10 @@ def main():
             st.session_state.last_analysis = result
             st.session_state.last_metrics = result["metrics"]
             st.session_state.analysis_interrupted = False
+            charts, unavailable = capture_charts(result, OUTPUT_DIR)
+            st.session_state.analysis_charts = merge_chart_history(
+                st.session_state.get("analysis_charts", []), charts)
+            st.session_state.chart_unavailable = unavailable
         except Exception as error:
             st.session_state.last_metrics = getattr(error, "analysis_metrics", None)
             # Only offer resume when a checkpoint actually has pending work.
@@ -136,12 +128,6 @@ def main():
         else:
             st.write(answer)
 
-        new_charts = [Path(path) for path in result.get("artifacts", []) if Path(path).is_file()]
-        if new_charts:
-            st.subheader("Generated Chart")
-            for chart_path in new_charts:
-                st.image(str(chart_path), caption=chart_path.name)
-
     if st.session_state.get("last_metrics"):
         metrics = st.session_state.last_metrics
         with st.expander("Run details"):
@@ -155,15 +141,16 @@ def main():
 
     st.divider()
 
-    st.subheader("Recent Generated Charts")
-
-    recent_charts = get_png_files()[:4]
-
-    if recent_charts:
-        for chart_path in recent_charts:
-            st.image(str(chart_path), caption=chart_path.name)
+    st.subheader("Charts from this conversation")
+    st.caption("Up to four recent charts. Start a new chart request to regenerate a result.")
+    if st.session_state.get("chart_unavailable"):
+        st.warning("A chart is unavailable or has changed. Run the chart request again.")
+    charts = st.session_state.get("analysis_charts", [])
+    if charts:
+        for chart in charts:
+            st.image(chart["data"], caption=chart["caption"])
     else:
-        st.write("No charts generated yet.")
+        st.write("No charts in this conversation yet.")
 
 
 if __name__ == "__main__":
