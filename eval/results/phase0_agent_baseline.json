@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "benchmark": "analytics-agent-tasks-v1",
+  "benchmark_sha256": "5e3642bcab6c8f7fdd722df279459d986ecef4cdc872f58216126bc09b1df90f",
+  "runner_sha256": "ffb6ca562d1f27d356317e49dbb6dd95a839091f8b02c67f473b68fa29baaaba",
+  "started_at_utc": "2026-10-17T20:28:58.946328+00:00",
+  "scope": "Actual current Agent, synthetic fixture only; no retail data or remote tracing.",
+  "limits": {
+    "request_timeout_seconds": 30,
+    "model_max_retries": 0,
+    "max_output_tokens_per_call": 1000,
+    "graph_recursion_limit": 12
+  },
+  "environment": {
+    "python": "3.13.7",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "executable": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    "packages": {
+      "pandas": "3.0.3",
+      "numpy": "2.4.4",
+      "matplotlib": "3.11.1",
+      "scipy": "1.18.0",
+      "statsmodels": "0.14.6",
+      "streamlit": "1.57.0",
+      "python-dotenv": "1.2.3",
+      "langchain": "1.3.15",
+      "langchain-openai": "1.5.1",
+      "langgraph": "1.2.11",
+      "langsmith": "0.11.0"
+    }
+  },
+  "source_sha256": {
+    "agent/analytics_agent.py": "a637d89af87c4770cb414da477367b33954af8558856684de5c06b88c0b206b9",
+    "app/basic_analytics_assistant.py": "a578db22a78ea79ce3462b5f6af7cce999e1173f4f50869683937e59766ce0d0",
+    "app/streamlit_app.py": "8fe413997a25532ae01b6862c37fc00827930472207cdef393b4f77cd0adced8",
+    "tools/ab_test_tool.py": "02c15ab6a6a5dcbf3e62c5a3a1bb6252665169569c891a10c18291e53b3fd6fe",
+    "tools/sql_tool.py": "42920871e0a63718408cce45fe45d059fda690291a335c1aad95fd84f816cbe5",
+    "tools/visualization_tool.py": "8b6eae0b328e7d1183e8603ffd920544476a717fa1868db1df8dd5c2bed2cf45",
+    "scripts/create_database.py": "557c5dd460f1c4108cff016c3e3b944bd5941fd6dd3d9ab1e79e9c5106cfe6cf",
+    "eval/eval_harness.py": "4b399b46f9a9ada13a5bb030157511b4f23f1ee62a883b9924b1649a94d813c1",
+    "requirements.txt": "65ae284ba8f55474f781538320f6ade12034cc17b3deccf7f64d287770bbd3df"
+  },
+  "cases": [
+    {
+      "id": "sql_countries",
+      "category": "sql",
+      "question": "What are the top three countries by total net revenue? Include refunds.",
+      "expected": {
+        "rows": [
+          [
+            "DE",
+            60.0
+          ],
+          [
+            "UK",
+            48.0
+          ],
+          [
+            "US",
+            30.0
+          ]
+        ],
+        "order": "revenue descending"
+      },
+      "review": null,
+      "status": "error",
+      "error": {
+        "type": "BadRequestError",
+        "status_code": 400
+      },
+      "token_usage": null,
+      "duration_ms": 1435.605,
+      "observations": [],
+      "fixture_unchanged": true
+    }
+  ],
+  "task_success_rate": null,
+  "review_status": "not_scorable_api_configuration_error",
+  "configured_model": "openai:gpt-5.6",
+  "stop_reason": "Stopped at first model/runtime error; remaining tasks not run.",
+  "finished_at_utc": "2026-10-17T20:29:02.085646+00:00",
+  "status": "incomplete",
+  "existing_source_unchanged": true,
+  "diagnosis": {
+    "confirmed_by_second_attempt": true,
+    "error": {
+      "type": "BadRequestError",
+      "status_code": 400,
+      "param": "reasoning_effort",
+      "message": "Function tools with reasoning_effort are not supported for gpt-5.6 in /v1/chat/completions. To use function tools, use /v1/responses or set reasoning_effort to 'none'."
+    },
+    "diagnostic_runner_sha256": "311d2b945886d7b2ac0ac77f0efad7619d23721eb8bcec4e64d2b9ab883ab02d",
+    "diagnostic_duration_ms": 577.16,
+    "official_reference": "https://developers.openai.com/api/docs/guides/migrate-to-responses",
+    "local_sdk_reasoning_effort": null,
+    "local_sdk_use_responses_api": null,
+    "next_step": "Keep the same model; fix API compatibility, then replay all 12 tasks before modifying Agent orchestration."
+  },
+  "task_counts": {
+    "planned": 12,
+    "attempted_distinct_tasks": 1,
+    "completed": 0,
+    "not_attempted": 11
+  },
+  "api_request_attempts_including_diagnostic": 2
+}

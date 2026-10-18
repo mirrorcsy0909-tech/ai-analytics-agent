@@ -1,0 +1,37 @@
+name: ai-analytics-agent
+x-common: &common
+  image: ai-analytics-agent:local
+  build: .
+  env_file: .env
+  init: true
+  read_only: true
+  tmpfs:
+    - /tmp:size=128m
+  volumes:
+    - type: volume
+      source: analytics_data
+      target: /app/database
+      read_only: true
+    - analysis_outputs:/app/outputs
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  mem_limit: 1g
+services:
+  api:
+    <<: *common
+    ports: ["127.0.0.1:8000:8000"]
+  ui:
+    <<: *common
+    profiles: [ui]
+    command: ["python", "-m", "streamlit", "run", "app/streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501", "--browser.gatherUsageStats=false"]
+    ports: ["127.0.0.1:8501:8501"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+volumes:
+  analytics_data:
+    name: ai-analytics-agent-data
+  analysis_outputs:

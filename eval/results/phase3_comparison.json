@@ -1,0 +1,52 @@
+{
+  "created_at_utc": "2026-10-17T23:55:33.070935+00:00",
+  "scope": "Same frozen synthetic taskset and model settings, one run per phase. Codex answer review, not independent human adjudication. Cloud not tested.",
+  "taskset_sha256": "5e3642bcab6c8f7fdd722df279459d986ecef4cdc872f58216126bc09b1df90f",
+  "phase2": {
+    "scored_tasks": 12,
+    "strict_passed": 12,
+    "mean_duration_ms": 6900.528,
+    "median_duration_ms": 7172.2685,
+    "reported_tokens": 39185,
+    "usage_case_count": 12
+  },
+  "phase3": {
+    "scored_tasks": 12,
+    "strict_passed": 12,
+    "mean_duration_ms": 7328.77625,
+    "median_duration_ms": 7786.4025,
+    "reported_tokens": 41225,
+    "usage_case_count": 12,
+    "model_calls": 28,
+    "tool_calls": 16,
+    "token_counters_agree_with_returned_messages": true,
+    "usage_complete_cases": 12,
+    "workflow_retries": 0,
+    "cloud_verified": false
+  },
+  "validation": {
+    "offline_tests_passed": 69,
+    "offline_tests_total": 69,
+    "tool_checks_passed": 34,
+    "tool_checks_total": 34,
+    "unittest_log_sha256": "0bece6d6530e4823542ee138aa0f07096a1aa1a51f768d8889119082eb177564",
+    "test_source_sha256": {
+      "tests/test_observability.py": "d8ae4414d4270f05cae675d9eb1939ed37254d630499f3a3506f37d335f91cfb",
+      "tests/test_reliability.py": "b1e8c8a61bb2dfd69771f57db00338a8aa33b829cc2b4748729a75c77249c9c5",
+      "tests/test_streamlit.py": "e7799a9961e130904073718377e961966b99581761f2585d5e224e93162804d4",
+      "tests/test_workflow.py": "81154ba2060e152d542245e2fd9a5c890ee7ec544cc16ca086378d207a00afd9"
+    }
+  },
+  "limits": [
+    "Twelve tasks and one replay per phase do not establish production accuracy.",
+    "Model-generated query and answer choices vary; latency/token differences are not an isolated measure of observability overhead.",
+    "The scorer recognizes selected query aliases and evidence shapes; general semantic correctness still requires separate evaluation.",
+    "Cloud dataset synchronization and transport were simulated locally only; actual cloud access requires a locally configured key."
+  ],
+  "artifacts": {
+    "eval/results/phase2_agent_workflow.json": "23cf487e1f77e5b1dc65a2ba9c8659161d023fb9a4b44880fe181044f3eb151d",
+    "eval/results/phase3_agent_workflow.json": "ca205e3049adedefdfe4f72939f73aac5acc0040f1678d62680b2c06129b24c1",
+    "eval/results/phase3_evaluation.json": "d131bd77e6ed276028fd4f3710657d0a33de1098bc8a4cdd73f6e9b712bd1301",
+    "eval/results/phase3_tool_baseline.json": "61f7fdc65339f166e31e8e0fbe81010023975c42a2ab0479a1d05ea0942df914"
+  }
+}

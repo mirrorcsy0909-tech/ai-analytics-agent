@@ -1,5 +1,5 @@
-import os
 import sys
+from uuid import uuid4
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -13,6 +13,9 @@ sys.path.append(str(BASE_DIR))
 from tools.sql_tool import run_sql_query
 from tools.visualization_tool import create_bar_chart, create_line_chart
 from tools.ab_test_tool import run_ab_test
+from agent.model_config import build_model
+from agent.evidence import table_evidence, seal_evidence
+from agent.answer_validation import GROUNDING_PROMPT, validate_answer
 
 
 load_dotenv()
@@ -57,173 +60,72 @@ Columns:
 Important notes:
 - Use the transactions table for retail sales analysis.
 - Revenue is already available as a numeric column.
+- Currency is unspecified. Never assume dollars or any other currency.
 - Use only SELECT queries.
 - For country, product, customer, and monthly analysis, aggregate Revenue with SUM(Revenue).
 """
 
 
-@tool
-def query_retail_database(sql_query: str) -> str:
-    """
-    Run a safe SELECT SQL query against the retail transactions database.
+@tool(response_format="content_and_artifact")
+def query_retail_database(sql_query: str) -> tuple[str, dict]:
+    """Run one read-only SELECT/CTE over transactions; aggregate or LIMIT to 1000 rows.
 
-    Input should be a valid SQLite SELECT query.
-    Use this for questions about revenue, countries, products, customers, and monthly trends.
-    Do not use INSERT, UPDATE, DELETE, DROP, ALTER, CREATE, or other write operations.
+    Returns JSON evidence with displayed rows and an evidence ID. Currency is
+    unspecified. Cite exact displayed columns and rows when answering.
     """
     try:
-        result = run_sql_query(sql_query)
-        return dataframe_to_text(result)
+        return table_evidence(run_sql_query(sql_query), query=sql_query)
     except Exception as error:
-        return f"SQL query failed. Error: {error}"
+        return f"SQL query failed. Error: {error}", {"kind": "error"}
 
 
-@tool
-def create_retail_chart(analysis_type: str) -> str:
-    """
-    Create and save a chart for a standard retail analysis.
+@tool(response_format="content_and_artifact")
+def create_retail_chart(analysis_type: str) -> tuple[str, dict]:
+    """Create a standard chart and return its path, data and evidence ID.
 
-    analysis_type must be one of:
-    - countries
-    - products
-    - customers
-    - monthly
-
-    Use this when the user asks to show, plot, chart, or visualize retail performance.
+    analysis_type: countries, products, customers, or monthly. Chart rows are
+    included in JSON evidence; do not invent chart data or currency units.
     """
     analysis_type = analysis_type.lower().strip()
-
-    if analysis_type == "countries":
-        query = """
-        SELECT Country,
-               SUM(Revenue) AS total_revenue
-        FROM transactions
-        GROUP BY Country
-        ORDER BY total_revenue DESC
-        LIMIT 10;
-        """
-
-        result = run_sql_query(query)
-
-        chart_path = create_bar_chart(
-            df=result,
-            x_col="Country",
-            y_col="total_revenue",
-            title="Top 10 Countries by Revenue",
-            filename="agent_top_countries_by_revenue.png",
-        )
-
-        return f"Chart created successfully: {chart_path}"
-
-    if analysis_type == "products":
-        query = """
-        SELECT Description,
-               SUM(Revenue) AS total_revenue
-        FROM transactions
-        GROUP BY Description
-        ORDER BY total_revenue DESC
-        LIMIT 10;
-        """
-
-        result = run_sql_query(query)
-
-        chart_path = create_bar_chart(
-            df=result,
-            x_col="Description",
-            y_col="total_revenue",
-            title="Top 10 Products by Revenue",
-            filename="agent_top_products_by_revenue.png",
-        )
-
-        return f"Chart created successfully: {chart_path}"
-
-    if analysis_type == "customers":
-        query = """
-        SELECT CustomerID,
-               SUM(Revenue) AS total_revenue
-        FROM transactions
-        WHERE CustomerID IS NOT NULL
-        GROUP BY CustomerID
-        ORDER BY total_revenue DESC
-        LIMIT 10;
-        """
-
-        result = run_sql_query(query)
-
-        chart_path = create_bar_chart(
-            df=result,
-            x_col="CustomerID",
-            y_col="total_revenue",
-            title="Top 10 Customers by Revenue",
-            filename="agent_top_customers_by_revenue.png",
-        )
-
-        return f"Chart created successfully: {chart_path}"
-
-    if analysis_type == "monthly":
-        query = """
-        SELECT InvoiceMonth,
-               SUM(Revenue) AS total_revenue
-        FROM transactions
-        GROUP BY InvoiceMonth
-        ORDER BY InvoiceMonth;
-        """
-
-        result = run_sql_query(query)
-
-        chart_path = create_line_chart(
-            df=result,
-            x_col="InvoiceMonth",
-            y_col="total_revenue",
-            title="Monthly Revenue Trend",
-            filename="agent_monthly_revenue_trend.png",
-        )
-
-        return f"Chart created successfully: {chart_path}"
-
-    return "Invalid analysis_type. Use one of: countries, products, customers, monthly."
+    definitions = {
+        "countries": ("Country", "", "total_revenue DESC", "Top Countries by Revenue"),
+        "products": ("Description", "", "total_revenue DESC", "Top Products by Revenue"),
+        "customers": ("CustomerID", "WHERE CustomerID IS NOT NULL", "total_revenue DESC", "Top Customers by Revenue"),
+        "monthly": ("InvoiceMonth", "", "InvoiceMonth", "Monthly Revenue Trend"),
+    }
+    if analysis_type not in definitions:
+        return "Invalid analysis_type. Use countries, products, customers, or monthly.", {"kind": "error"}
+    x_col, where, order, title = definitions[analysis_type]
+    query = f"SELECT {x_col}, SUM(Revenue) AS total_revenue FROM transactions {where} GROUP BY {x_col} ORDER BY {order}"
+    if analysis_type != "monthly":
+        query += " LIMIT 10"
+    frame = run_sql_query(query)
+    chart_function = create_line_chart if analysis_type == "monthly" else create_bar_chart
+    path = chart_function(df=frame, x_col=x_col, y_col="total_revenue", title=title,
+                          filename=f"agent_{analysis_type}.png")
+    return table_evidence(frame, kind="chart", query=query, path=path,
+                          x_col=x_col, y_col="total_revenue", analysis_type=analysis_type)
 
 
-@tool
-def run_ab_test_analysis(
-    control_conversions: int,
-    control_total: int,
-    treatment_conversions: int,
-    treatment_total: int,
-) -> str:
-    """
-    Run a two-proportion z-test for an A/B test.
+@tool(response_format="content_and_artifact")
+def run_ab_test_analysis(control_conversions: int, control_total: int,
+                         treatment_conversions: int, treatment_total: int,
+                         alpha: float = 0.05, alternative: str = "larger") -> tuple[str, dict]:
+    """Compare independent conversion counts, default H1 treatment > control.
 
-    Use this when the user provides control and treatment conversion counts.
-    Returns conversion rates, lift, z-statistic, p-value, 95% confidence interval,
-    statistical significance, and a business recommendation.
+    Returns JSON evidence, inputs, test method, assumptions and statistics.
+    Relative lift is null when the control rate is zero; report it as undefined.
+    Sparse data uses Fisher exact; the separately labeled interval is two-sided.
+    alternative is larger (treatment > control), smaller, or two-sided; follow
+    the user's prespecified hypothesis and never switch direction after results.
     """
     try:
-        result = run_ab_test(
-            control_conversions=control_conversions,
-            control_total=control_total,
-            treatment_conversions=treatment_conversions,
-            treatment_total=treatment_total,
-        )
-
-        ci_lower, ci_upper = result["confidence_interval_95"]
-
-        return f"""
-A/B Test Result:
-- Control conversion rate: {result['control_conversion_rate']:.4f}
-- Treatment conversion rate: {result['treatment_conversion_rate']:.4f}
-- Absolute lift: {result['absolute_lift']:.4f}
-- Relative lift: {result['relative_lift']:.2%}
-- Z-statistic: {result['z_statistic']:.4f}
-- P-value: {result['p_value']:.4f}
-- 95% confidence interval: ({ci_lower:.4f}, {ci_upper:.4f})
-- Statistically significant: {result['statistically_significant']}
-
-Business recommendation:
-{result['recommendation']}
-"""
+        counts = dict(control_conversions=control_conversions, control_total=control_total,
+                      treatment_conversions=treatment_conversions, treatment_total=treatment_total)
+        result = run_ab_test(**counts, alpha=alpha, alternative=alternative)
+        return seal_evidence({"kind": "ab_test", "stats": {**result, **counts}})
     except Exception as error:
-        return f"A/B test failed. Error: {error}"
+        return f"A/B test failed. Error: {error}", {"kind": "error"}
 
 
 SYSTEM_PROMPT = """
@@ -241,6 +143,7 @@ Rules:
 - Always use tools when the user asks for actual data analysis, charts, or A/B testing.
 - Do not make up numbers. Use the SQL tool or A/B testing tool.
 - Only use SELECT SQL queries.
+- Read-only CTEs are allowed. Aggregate or LIMIT queries to at most 1000 rows.
 - If the user asks for a chart, use create_retail_chart.
 - If the user asks for A/B testing but does not provide counts, ask for:
   control conversions, control total, treatment conversions, treatment total.
@@ -249,21 +152,30 @@ Rules:
 """
 
 
-def build_agent():
+def analytics_tools():
+    return [describe_retail_schema, query_retail_database,
+            create_retail_chart, run_ab_test_analysis]
+
+
+def build_legacy_agent(*, model=None):
     """
     Build the LangChain AI agent.
     """
-    model = os.getenv("OPENAI_MODEL", "openai:gpt-5.5")
-
     return create_agent(
-        model=model,
-        tools=[
-            describe_retail_schema,
-            query_retail_database,
-            create_retail_chart,
-            run_ab_test_analysis,
-        ],
+        model=model if model is not None else build_model(),
+        tools=analytics_tools(),
         system_prompt=SYSTEM_PROMPT,
+    )
+
+
+def build_agent(*, model=None, checkpointer=None, max_retries=2, max_tool_rounds=6):
+    from agent.workflow import build_workflow
+
+    return build_workflow(
+        model=model if model is not None else build_model(),
+        tools=analytics_tools(), system_prompt=SYSTEM_PROMPT,
+        checkpointer=checkpointer, max_retries=max_retries, max_tool_rounds=max_tool_rounds,
+        answer_validator=validate_answer, final_response_prompt=GROUNDING_PROMPT,
     )
 
 
@@ -271,6 +183,9 @@ def extract_final_text(agent_result) -> str:
     """
     Extract the final assistant message from the agent result.
     """
+    if agent_result.get("final_answer"):
+        return agent_result["final_answer"]
+
     messages = agent_result.get("messages", [])
 
     if not messages:
@@ -285,17 +200,19 @@ def extract_final_text(agent_result) -> str:
     if isinstance(content, list):
         text_parts = []
         for block in content:
-            if isinstance(block, dict) and "text" in block:
+            if isinstance(block, dict) and block.get("type") in {"text", "output_text"}:
                 text_parts.append(block["text"])
-            else:
-                text_parts.append(str(block))
         return "\n".join(text_parts)
 
     return str(content)
 
 
 def main():
-    agent = build_agent()
+    from langgraph.checkpoint.memory import InMemorySaver
+    from agent.observability import invoke_analysis
+
+    agent = build_agent(checkpointer=InMemorySaver())
+    config = {"configurable": {"thread_id": uuid4().hex}, "recursion_limit": 40}
 
     print("Welcome to the AI Analytics Agent")
     print("Ask about revenue, countries, products, customers, monthly trends, charts, or A/B testing.")
@@ -308,9 +225,13 @@ def main():
             print("Goodbye!")
             break
 
-        result = agent.invoke(
-            {"messages": [{"role": "user", "content": question}]}
-        )
+        try:
+            result = invoke_analysis(agent,
+                {"messages": [{"role": "user", "content": question}]}, config=config
+            )
+        except Exception:
+            print("Analysis could not finish. Check your connection and model settings, then try again.")
+            continue
 
         print("\nAgent Answer:")
         print(extract_final_text(result))

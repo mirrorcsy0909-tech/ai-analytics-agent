@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-18T02:27:47.663535+00:00",
+  "scope": "Local and Docker verification. No commit, push, external deployment or remote GitHub Actions run.",
+  "tests": {
+    "macos_project_environment": {
+      "passed": 87,
+      "total": 87
+    },
+    "linux_container": {
+      "passed": 87,
+      "total": 87
+    }
+  },
+  "frozen_tool_checks": {
+    "macos_passed": 34,
+    "linux_passed": 34,
+    "total": 34
+  },
+  "archived_task_rescoring": {
+    "passed": 12,
+    "total": 12,
+    "mode": "Local LangSmith SDK; no new model calls"
+  },
+  "live_api_smoke": {
+    "passed": 3,
+    "total": 3,
+    "data": "Frozen synthetic eight-row fixture and synthetic A/B counts"
+  },
+  "compose_health_checks": {
+    "api": {
+      "http_status": 200,
+      "health_passed": true
+    },
+    "ui": {
+      "http_status": 200,
+      "health_passed": true
+    }
+  },
+  "container": {
+    "image": "ai-analytics-agent:phase4",
+    "base_image": "python:3.13.7-slim-bookworm",
+    "base_index_digest": "sha256:adafcc17694d715c905b4c7bebd96907a1fd5cf183395f0ebc4d3428bd22d92d",
+    "non_root_verified": true,
+    "private_source_files_excluded": true,
+    "read_only_root_and_synthetic_database_verified": true,
+    "image_id": "sha256:e396f9abc0027e9c4135e1690a6f2431d7f312fdc60b118e8af2221db4da3b0a"
+  },
+  "langsmith": {
+    "current_credential_preserved": true,
+    "cloud_verified": false,
+    "last_direct_auth_status": 403,
+    "analysis_with_tracing_enabled_passed": true,
+    "reported_upload_status": "upload_error"
+  },
+  "source_sha256": {
+    "requirements.txt": "bca568892133bac21d7b99e6ee5cc18fd48f527b725e31acccbe1706f12c98ba",
+    "requirements.lock": "4f759eaa38092b41a5e4f06c990d0039e0808efb3cef55558d1ff2205702c41d",
+    "Dockerfile": "fa15b78009504dfaf47dd35ea050551f443013acfe925a1d81a64c65045ce157",
+    ".dockerignore": "5972acf24b804e9283343aec03ab6b07ab2b2251299fa9e052a4242fc109f10a",
+    "compose.yaml": "942be025e9ee86ec5664a27663f452f2b1cc07e1e7164779c2181b9524a873d9",
+    ".github/workflows/ci.yml": "fbd1eaaab4fa407ffd8f1e63bb897ebaacf3207dc34a3ecb1d0dc250766a93cf",
+    ".env.example": "5b23272608213b93eec57855f6382007214f20653d330d4f5f9d8de69daf576c",
+    "README.md": "0678e56002523f2fb855d044acca1c22d081fe9274309cc248dbcfb8b684aab1",
+    "docs/phase4_engineering.md": "df1900cf9740f9acd1f929f532285a018627e1b2afce6fc55a64630c871351df",
+    "api/__init__.py": "5dece8edba7b389076891099a6b6562df67f9acebe3364a4a58bb0c708e7336f",
+    "api/main.py": "a3d2dbbcdcd5b0684856b1791044df1e98c8a64262919fb4813ecd3059c39550",
+    "agent/analytics_agent.py": "6ca9ad0a0b0a0741b0abfc51506f8a5c264a8d0b2a0a9e1c45434c8dfc1af531",
+    "agent/answer_validation.py": "599b0143daca4750b1e96cfa9d804a09336fddd2855129ad51f1d32b09c9c761",
+    "agent/evidence.py": "46d5ce9bc71cd8393550cefc29a399d2a375265dceecf42eabc00681c3d15d82",
+    "agent/model_config.py": "a5d1f26b91df074230f059a5d60e651900f12d624dcec6b7524767a206f04569",
+    "agent/observability.py": "18537784b9a42ab67ccfbc1390bc7660416d670d2500c3c89663141f25929f9d",
+    "agent/workflow.py": "3eb5dc7a805ad894e694fc40f52e97f231a2eae0edbd3c063b0c1f92f04814b9",
+    "app/basic_analytics_assistant.py": "a578db22a78ea79ce3462b5f6af7cce999e1173f4f50869683937e59766ce0d0",
+    "app/streamlit_app.py": "89fe09193eae755510b2f016226fc30bb7c12ce348d22f1321ed2771aeb85dc0",
+    "tools/ab_test_tool.py": "81825c1c0e855889d7087661e5d2820a149fa6a6f123c13cf4152cf8510499ac",
+    "tools/sql_tool.py": "e2208e7ac8896069db3cc74babbcba235a2e36b0efad04b672da53b4d00ea8fd",
+    "tools/visualization_tool.py": "7eac8a6bcab368237ceca16152edda4cfce760a9711d7a15525687554edd2aed",
+    "scripts/create_database.py": "557c5dd460f1c4108cff016c3e3b944bd5941fd6dd3d9ab1e79e9c5106cfe6cf",
+    "scripts/load_docker_database.py": "d1fcb3ff4f6ce72ec77440f240f03cbd4e8692bd6e2f809de1d8d2142f5dc425",
+    "tests/test_api.py": "99c78685e95b0f9d7aa1d4ccdbb6d5ce764b4eb42beaaa47c70676632b9cbf9d",
+    "tests/test_docker_data.py": "a17f76bed5ae512d528b46d52053cb692020c5d51564347debdb2425c9ff53a1",
+    "tests/test_observability.py": "d8ae4414d4270f05cae675d9eb1939ed37254d630499f3a3506f37d335f91cfb",
+    "tests/test_reliability.py": "b1e8c8a61bb2dfd69771f57db00338a8aa33b829cc2b4748729a75c77249c9c5",
+    "tests/test_streamlit.py": "913c05af944c5b3eb588b853e8eb43ab2df9094368e0189574ac9662d0d2ecac",
+    "tests/test_workflow.py": "81154ba2060e152d542245e2fd9a5c890ee7ec544cc16ca086378d207a00afd9"
+  },
+  "test_log_sha256": {
+    "outputs/phase4_tests.log": "1ea2f96b605eae0e703ed1a8f40cc038b09986c441a2d8e6c650cd58ed91470f",
+    "outputs/phase4_docker_ci.log": "9fea07b5cbbaa0f3f19c9eb396023d1c38f352ac1db25f9f731c13c858f1a239"
+  },
+  "limits": [
+    "Remote GitHub Actions has not run; the workflow jobs were exercised locally in a Linux container.",
+    "API artifact registry and concurrency limits are process-local; API requests do not share conversation history.",
+    "Model call timeouts do not impose a total HTTP analysis deadline or cancel processing after client disconnect.",
+    "LangSmith cloud persistence and dataset publishing remain unverified with the current credential."
+  ],
+  "local_services": {
+    "streamlit": "http://127.0.0.1:8501",
+    "api_docs": "http://127.0.0.1:8000/docs"
+  },
+  "verification_artifacts_sha256": {
+    "eval/results/phase4_tracing_failure_smoke.json": "4ff279dec18c89585c69d40531eac3bf60e9c231a4484edf299157e06e0f5778",
+    "eval/results/phase4_api_smoke.json": "eb07fc7f5d3f8a80e7c955f21248c656dff8d68930e37d38b672799c801e7c28",
+    "eval/results/phase4_tool_baseline.json": "d63efb3783d5ef0730af17580f7d1c6eca4819e2098dd5e4fb2654a6731bbc5a",
+    "eval/results/phase4_linux_tool_baseline.json": "cc7f73550a8ef51e49f7fc6a0e3c21d72080e32969f5b7cc1bfec6a64fec409b"
+  }
+}

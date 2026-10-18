@@ -1,0 +1,46 @@
+{
+  "checked_at_utc": "2026-10-18T05:48:59.275182+00:00",
+  "resolution": "Corrected the saved value of the same original LangSmith key; no rotation.",
+  "credential_value_included": false,
+  "key_rotated": false,
+  "env_ignored_by_git": true,
+  "env_mode": "0o600",
+  "offline_tests": {
+    "passed": 90,
+    "total": 90,
+    "log_sha256": "c614449dee499320360730cd0bcbdb91d2fdac6260c262e5aa2fa8c3dd6af5f2"
+  },
+  "cloud_trace": {
+    "verified": true,
+    "spans": 14,
+    "tool_span_verified": true,
+    "payloads_hidden": true,
+    "run_id": "b9d14025-3023-4145-ac30-57b1f93435fb"
+  },
+  "cloud_evaluation": {
+    "mode": "published_recorded_replay",
+    "evaluated_cases": 12,
+    "cloud_verified": true,
+    "dataset_id": "85da90d8-ac3a-409d-b9f9-9156f5bdf85b",
+    "experiment_id": "f22a4054-4dfa-4bbc-8a25-0faa590cd858",
+    "experiment_name": "analytics-recorded-replay-72f88a7e",
+    "experiment_url": "https://smith.langchain.com/o/4fd887fb-fb37-4e86-a96f-09dc498adc95/datasets/85da90d8-ac3a-409d-b9f9-9156f5bdf85b/compare?selectedSessions=f22a4054-4dfa-4bbc-8a25-0faa590cd858"
+  },
+  "evaluation_scope": "Replay of the existing frozen synthetic recording, not a new model benchmark.",
+  "strict_passed": 12,
+  "source_sha256": {
+    "eval/phase3_evaluate.py": "33436e1c4e341321d46dabcf9c169da6a9d6df3a34af29be419bb486bcdb3c30",
+    "tests/test_observability.py": "5167eba16e458edea4ef61799639cc95aa02164786b4805c8bc6b78e63defd17",
+    "README.md": "346468df4a9dfe5ad65a2dcb9f66b17aee4ef089f9439039999e67c8a93f9ed3",
+    "docs/phase3_observability.md": "692f5ca9b279c1ad5b9c95c0fc5311bdd684f5187d99e20a32b23fac951b8b36",
+    "docs/phase4_engineering.md": "1631217fe9fdd0428d811068d187c4c1adf179e00cc5122f41c4888678c790ea",
+    "eval/agent_tasks_v1.json": "5e3642bcab6c8f7fdd722df279459d986ecef4cdc872f58216126bc09b1df90f",
+    "eval/results/phase3_cloud_connection.json": "5a7885e6fe3431dc899071a2e40a4165ada8115b01db25f39a7ca111a032fcf1",
+    "eval/results/phase3_cloud_evaluation.json": "798360ecc4afface4716e9b372747621bd5fefb4f3b55e39de13c0c2a8d02ef3"
+  },
+  "local_services": {
+    "api": "http://127.0.0.1:8000/docs",
+    "streamlit": "http://127.0.0.1:8501",
+    "health_checked": true
+  }
+}

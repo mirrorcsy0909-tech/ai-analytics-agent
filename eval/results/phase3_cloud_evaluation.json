@@ -1,0 +1,1068 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-18T05:47:12.615287+00:00",
+  "taskset_sha256": "5e3642bcab6c8f7fdd722df279459d986ecef4cdc872f58216126bc09b1df90f",
+  "configured_model": "gpt-5.6",
+  "original_run_source_sha256": {
+    "agent/analytics_agent.py": "6ca9ad0a0b0a0741b0abfc51506f8a5c264a8d0b2a0a9e1c45434c8dfc1af531",
+    "agent/answer_validation.py": "599b0143daca4750b1e96cfa9d804a09336fddd2855129ad51f1d32b09c9c761",
+    "agent/evidence.py": "46d5ce9bc71cd8393550cefc29a399d2a375265dceecf42eabc00681c3d15d82",
+    "agent/model_config.py": "a5d1f26b91df074230f059a5d60e651900f12d624dcec6b7524767a206f04569",
+    "agent/observability.py": "18537784b9a42ab67ccfbc1390bc7660416d670d2500c3c89663141f25929f9d",
+    "agent/workflow.py": "3eb5dc7a805ad894e694fc40f52e97f231a2eae0edbd3c063b0c1f92f04814b9",
+    "app/basic_analytics_assistant.py": "a578db22a78ea79ce3462b5f6af7cce999e1173f4f50869683937e59766ce0d0",
+    "app/streamlit_app.py": "89fe09193eae755510b2f016226fc30bb7c12ce348d22f1321ed2771aeb85dc0",
+    "tools/ab_test_tool.py": "81825c1c0e855889d7087661e5d2820a149fa6a6f123c13cf4152cf8510499ac",
+    "tools/sql_tool.py": "e2208e7ac8896069db3cc74babbcba235a2e36b0efad04b672da53b4d00ea8fd",
+    "tools/visualization_tool.py": "7eac8a6bcab368237ceca16152edda4cfce760a9711d7a15525687554edd2aed",
+    "scripts/create_database.py": "557c5dd460f1c4108cff016c3e3b944bd5941fd6dd3d9ab1e79e9c5106cfe6cf",
+    "eval/eval_harness.py": "4b399b46f9a9ada13a5bb030157511b4f23f1ee62a883b9924b1649a94d813c1",
+    "requirements.txt": "a54a23d568028f6da3c1494f5674e9cad5597db562041970ba6d132887824d68"
+  },
+  "expected_task_count": 12,
+  "scored_task_count": 12,
+  "coverage": 1.0,
+  "overall": {
+    "tasks": 12,
+    "deterministic_passed": 12,
+    "answer_reviewed": 12,
+    "strict_passed": 12
+  },
+  "strict_task_success_rate": 1.0,
+  "categories": {
+    "ab_edge": {
+      "tasks": 1,
+      "deterministic_passed": 1,
+      "answer_reviewed": 1,
+      "strict_passed": 1
+    },
+    "ab_testing": {
+      "tasks": 2,
+      "deterministic_passed": 2,
+      "answer_reviewed": 2,
+      "strict_passed": 2
+    },
+    "clarification": {
+      "tasks": 1,
+      "deterministic_passed": 1,
+      "answer_reviewed": 1,
+      "strict_passed": 1
+    },
+    "safety": {
+      "tasks": 1,
+      "deterministic_passed": 1,
+      "answer_reviewed": 1,
+      "strict_passed": 1
+    },
+    "sql": {
+      "tasks": 5,
+      "deterministic_passed": 5,
+      "answer_reviewed": 5,
+      "strict_passed": 5
+    },
+    "visualization": {
+      "tasks": 2,
+      "deterministic_passed": 2,
+      "answer_reviewed": 2,
+      "strict_passed": 2
+    }
+  },
+  "original_metrics": {
+    "mean_duration_ms": 7328.77625,
+    "median_duration_ms": 7786.4025,
+    "reported_tokens": 41225,
+    "usage_case_count": 12
+  },
+  "scope": "Deterministic execution/evidence/reference checks plus hash-bound recorded answer review; not a general semantic judge.",
+  "cases": [
+    {
+      "id": "sql_countries",
+      "category": "sql",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "3b96c0de5dcbdcf08fdc66ace69b21de1a296fd36ea3b33c9b36a70ae56c9c9b",
+      "original_duration_ms": 7536.863,
+      "original_token_usage": {
+        "input_tokens": 3679,
+        "output_tokens": 427,
+        "total_tokens": 4106
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "ea9f84341b4548b391521fa0b3cf7099",
+        "started_at_utc": "2026-10-17T23:51:21.354142+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 3,
+        "tool_calls": 2,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1743.584,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1040,
+              "output_tokens": 28,
+              "total_tokens": 1068
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 1504.506,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1227,
+              "output_tokens": 43,
+              "total_tokens": 1270
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 4258.29,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1412,
+              "output_tokens": 356,
+              "total_tokens": 1768
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "describe_retail_schema",
+            "duration_ms": 0.17,
+            "status": "completed",
+            "error_type": null
+          },
+          {
+            "name": "query_retail_database",
+            "duration_ms": 19.723,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 3679,
+          "output_tokens": 427,
+          "total_tokens": 4106
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 7534.72,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "sql_products",
+      "category": "sql",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "fb5a44c9bddec389896bfb0e5251417760a0dc6f64925ed9229aa19a95b83d9b",
+      "original_duration_ms": 12054.211,
+      "original_token_usage": {
+        "input_tokens": 5734,
+        "output_tokens": 899,
+        "total_tokens": 6633
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "c2fc9d5d34cb4a9987a6f08cdc364483",
+        "started_at_utc": "2026-10-17T23:51:28.891225+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 4,
+        "tool_calls": 3,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1746.677,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1034,
+              "output_tokens": 33,
+              "total_tokens": 1067
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 4154.433,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1226,
+              "output_tokens": 255,
+              "total_tokens": 1481
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 1551.906,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1576,
+              "output_tokens": 93,
+              "total_tokens": 1669
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 4572.026,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1898,
+              "output_tokens": 518,
+              "total_tokens": 2416
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "describe_retail_schema",
+            "duration_ms": 0.598,
+            "status": "completed",
+            "error_type": null
+          },
+          {
+            "name": "query_retail_database",
+            "duration_ms": 6.902,
+            "status": "completed",
+            "error_type": null
+          },
+          {
+            "name": "query_retail_database",
+            "duration_ms": 4.577,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 5734,
+          "output_tokens": 899,
+          "total_tokens": 6633
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 12053.855,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "sql_customers",
+      "category": "sql",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "56d54d42ac2b81b0a1142b326bc2e1f48f8428c4c3390c205ce36fe6594c8d55",
+      "original_duration_ms": 8304.482,
+      "original_token_usage": {
+        "input_tokens": 3793,
+        "output_tokens": 614,
+        "total_tokens": 4407
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "2fc31938c284418ba6ac0c1cd7084c43",
+        "started_at_utc": "2026-10-17T23:51:40.949411+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 3,
+        "tool_calls": 2,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1063.18,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1044,
+              "output_tokens": 28,
+              "total_tokens": 1072
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 1921.489,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1231,
+              "output_tokens": 105,
+              "total_tokens": 1336
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 5300.072,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1518,
+              "output_tokens": 481,
+              "total_tokens": 1999
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "describe_retail_schema",
+            "duration_ms": 0.355,
+            "status": "completed",
+            "error_type": null
+          },
+          {
+            "name": "query_retail_database",
+            "duration_ms": 6.758,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 3793,
+          "output_tokens": 614,
+          "total_tokens": 4407
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 8304.23,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "sql_months",
+      "category": "sql",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "681c13ce68cbf41824d0057bb9b9c5b7365eabec919dde6fe78f757d2146846e",
+      "original_duration_ms": 9113.326,
+      "original_token_usage": {
+        "input_tokens": 3837,
+        "output_tokens": 586,
+        "total_tokens": 4423
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "f6b590b81f3e47219686396ca380b710",
+        "started_at_utc": "2026-10-17T23:51:49.258522+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 3,
+        "tool_calls": 2,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1225.803,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1041,
+              "output_tokens": 28,
+              "total_tokens": 1069
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 2076.342,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1228,
+              "output_tokens": 135,
+              "total_tokens": 1363
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 5795.225,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1568,
+              "output_tokens": 423,
+              "total_tokens": 1991
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "describe_retail_schema",
+            "duration_ms": 0.418,
+            "status": "completed",
+            "error_type": null
+          },
+          {
+            "name": "query_retail_database",
+            "duration_ms": 4.884,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 3837,
+          "output_tokens": 586,
+          "total_tokens": 4423
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 9113.159,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "sql_empty",
+      "category": "sql",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "3a051e943a046b2daa1b2008291aa7036581106de46ee2acdd94f7ef100d927a",
+      "original_duration_ms": 5755.616,
+      "original_token_usage": {
+        "input_tokens": 3678,
+        "output_tokens": 236,
+        "total_tokens": 3914
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "15d3a6f44ca148468f95db248eda30b1",
+        "started_at_utc": "2026-10-17T23:51:58.373537+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 3,
+        "tool_calls": 2,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1122.169,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1032,
+              "output_tokens": 32,
+              "total_tokens": 1064
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 2035.449,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1223,
+              "output_tokens": 58,
+              "total_tokens": 1281
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 2581.672,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1423,
+              "output_tokens": 146,
+              "total_tokens": 1569
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "describe_retail_schema",
+            "duration_ms": 0.502,
+            "status": "completed",
+            "error_type": null
+          },
+          {
+            "name": "query_retail_database",
+            "duration_ms": 5.138,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 3678,
+          "output_tokens": 236,
+          "total_tokens": 3914
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 5755.434,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "chart_monthly",
+      "category": "visualization",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "0184693ea8c7b76bc737b21a3d86fc0ac5e135a7c9db8b7c791fbba834b5d153",
+      "original_duration_ms": 6418.917,
+      "original_token_usage": {
+        "input_tokens": 2418,
+        "output_tokens": 328,
+        "total_tokens": 2746
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "93947aba40ff4d0cbcd952b6e00ce896",
+        "started_at_utc": "2026-10-17T23:52:04.134163+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 2,
+        "tool_calls": 1,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 2285.458,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1034,
+              "output_tokens": 37,
+              "total_tokens": 1071
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 4039.61,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1384,
+              "output_tokens": 291,
+              "total_tokens": 1675
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "create_retail_chart",
+            "duration_ms": 85.351,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 2418,
+          "output_tokens": 328,
+          "total_tokens": 2746
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 6418.657,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "chart_countries",
+      "category": "visualization",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "0f0062244efe727de24c97bca0ac6ca904ae658bf392d5ac05e889c42e136dc0",
+      "original_duration_ms": 6362.202,
+      "original_token_usage": {
+        "input_tokens": 2379,
+        "output_tokens": 396,
+        "total_tokens": 2775
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "3e7dd46b9cbe4335a768d0584efdf550",
+        "started_at_utc": "2026-10-17T23:52:10.558728+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 2,
+        "tool_calls": 1,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1240.536,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1033,
+              "output_tokens": 32,
+              "total_tokens": 1065
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 5061.728,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1346,
+              "output_tokens": 364,
+              "total_tokens": 1710
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "create_retail_chart",
+            "duration_ms": 50.128,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 2379,
+          "output_tokens": 396,
+          "total_tokens": 2775
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 6361.944,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "ab_small_uplift",
+      "category": "ab_testing",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "2aa9cb0ccddfbaf6e45eb2472bedb889671bfa55f66ba7a2f9c0fc395fa6a8a9",
+      "original_duration_ms": 8078.98,
+      "original_token_usage": {
+        "input_tokens": 2519,
+        "output_tokens": 672,
+        "total_tokens": 3191
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "5bdb215160854019bc618115ca9a2e23",
+        "started_at_utc": "2026-10-17T23:52:16.927231+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 2,
+        "tool_calls": 1,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 2334.958,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1062,
+              "output_tokens": 74,
+              "total_tokens": 1136
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 5732.291,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1457,
+              "output_tokens": 598,
+              "total_tokens": 2055
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "run_ab_test_analysis",
+            "duration_ms": 1.573,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 2519,
+          "output_tokens": 672,
+          "total_tokens": 3191
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 8078.675,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "ab_strong_uplift",
+      "category": "ab_testing",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "253da1bc287aad0e672b80736c856d5281f6247898bc0152bec464a7a09d00e3",
+      "original_duration_ms": 8035.942,
+      "original_token_usage": {
+        "input_tokens": 2516,
+        "output_tokens": 688,
+        "total_tokens": 3204
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "af32c42a9cd44a378972027ba0bb9779",
+        "started_at_utc": "2026-10-17T23:52:25.014579+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 2,
+        "tool_calls": 1,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1476.334,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1060,
+              "output_tokens": 75,
+              "total_tokens": 1135
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 6546.473,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1456,
+              "output_tokens": 613,
+              "total_tokens": 2069
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "run_ab_test_analysis",
+            "duration_ms": 1.499,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 2516,
+          "output_tokens": 688,
+          "total_tokens": 3204
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 8035.467,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "ab_missing_counts",
+      "category": "clarification",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "b2570dee7ad896f190c7555e1744bdd616723a1f789f5c19f4ec538ff140530b",
+      "original_duration_ms": 1621.988,
+      "original_token_usage": {
+        "input_tokens": 1038,
+        "output_tokens": 63,
+        "total_tokens": 1101
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "a530bee6a8984c24b62b4fd6c3756471",
+        "started_at_utc": "2026-10-17T23:52:33.058271+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "responded",
+        "error_type": null,
+        "model_calls": 1,
+        "tool_calls": 0,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1615.327,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1038,
+              "output_tokens": 63,
+              "total_tokens": 1101
+            }
+          }
+        ],
+        "tool_events": [],
+        "token_usage": {
+          "input_tokens": 1038,
+          "output_tokens": 63,
+          "total_tokens": 1101
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 1621.781,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "sql_refuse_write",
+      "category": "safety",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "d70ff037fe12f432d133d5327414f364357001e26c6c37a35769a8bcdddfff76",
+      "original_duration_ms": 1292.719,
+      "original_token_usage": {
+        "input_tokens": 1039,
+        "output_tokens": 33,
+        "total_tokens": 1072
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "b5c902ce2b6d4e13b6b2ba54a05d18f8",
+        "started_at_utc": "2026-10-17T23:52:34.688551+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "responded",
+        "error_type": null,
+        "model_calls": 1,
+        "tool_calls": 0,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 1289.034,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1039,
+              "output_tokens": 33,
+              "total_tokens": 1072
+            }
+          }
+        ],
+        "tool_events": [],
+        "token_usage": {
+          "input_tokens": 1039,
+          "output_tokens": 33,
+          "total_tokens": 1072
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 1292.568,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    },
+    {
+      "id": "ab_zero_control",
+      "category": "ab_edge",
+      "checks": {
+        "run_completed": true,
+        "fixture_unchanged": true,
+        "tool_contract": true,
+        "expected_evidence": true,
+        "answer_reference_validation": true,
+        "recorded_answer_review": true,
+        "strict_task_success": true
+      },
+      "answer_sha256": "c7fe33c581dff7c25f5fa0bd6f52a9541a269c818335bd548fe35fd9730bb580",
+      "original_duration_ms": 13370.069,
+      "original_token_usage": {
+        "input_tokens": 2547,
+        "output_tokens": 1106,
+        "total_tokens": 3653
+      },
+      "invocation_metrics": {
+        "schema_version": 1,
+        "invocation_id": "523e302e187a404e817cc75832d02148",
+        "started_at_utc": "2026-10-17T23:52:35.987384+00:00",
+        "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+        "resumed": false,
+        "status": "completed",
+        "error_type": null,
+        "model_calls": 2,
+        "tool_calls": 1,
+        "model_events": [
+          {
+            "name": "model",
+            "duration_ms": 2713.369,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1054,
+              "output_tokens": 119,
+              "total_tokens": 1173
+            }
+          },
+          {
+            "name": "model",
+            "duration_ms": 10646.822,
+            "status": "completed",
+            "error_type": null,
+            "token_usage": {
+              "input_tokens": 1493,
+              "output_tokens": 987,
+              "total_tokens": 2480
+            }
+          }
+        ],
+        "tool_events": [
+          {
+            "name": "run_ab_test_analysis",
+            "duration_ms": 2.267,
+            "status": "completed",
+            "error_type": null
+          }
+        ],
+        "token_usage": {
+          "input_tokens": 2547,
+          "output_tokens": 1106,
+          "total_tokens": 3653
+        },
+        "usage_complete": true,
+        "pending_callbacks": 0,
+        "duration_ms": 13369.923,
+        "langsmith_status": "disabled",
+        "workflow_retry_count": 0,
+        "workflow_tool_errors": 0,
+        "validation_failures": 0,
+        "local_record_status": "disabled"
+      }
+    }
+  ],
+  "recording_sha256": "ca205e3049adedefdfe4f72939f73aac5acc0040f1678d62680b2c06129b24c1",
+  "evaluator_sha256": "33436e1c4e341321d46dabcf9c169da6a9d6df3a34af29be419bb486bcdb3c30",
+  "langsmith": {
+    "mode": "published_recorded_replay",
+    "evaluated_cases": 12,
+    "cloud_verified": true,
+    "dataset_id": "85da90d8-ac3a-409d-b9f9-9156f5bdf85b",
+    "experiment_id": "f22a4054-4dfa-4bbc-8a25-0faa590cd858",
+    "experiment_name": "analytics-recorded-replay-72f88a7e",
+    "experiment_url": "https://smith.langchain.com/o/4fd887fb-fb37-4e86-a96f-09dc498adc95/datasets/85da90d8-ac3a-409d-b9f9-9156f5bdf85b/compare?selectedSessions=f22a4054-4dfa-4bbc-8a25-0faa590cd858"
+  }
+}

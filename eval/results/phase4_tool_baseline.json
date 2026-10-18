@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "benchmark": "phase0-tools-v1",
+  "benchmark_sha256": "69686c607a90b73c15037a85c61a22685a1fb1c1a31a46bd6b1d56a4cbcd3ff2",
+  "generated_at_utc": "2026-10-18T02:24:50.421709+00:00",
+  "scope": "Offline tool checks only. No natural-language agent invocation.",
+  "end_to_end_task_success_rate": null,
+  "model_latency_ms": null,
+  "token_usage": null,
+  "api_requests": 0,
+  "timing_note": "Local check durations include assertions and chart rendering; not model or service latency.",
+  "fixture": {
+    "kind": "synthetic",
+    "rows": 8,
+    "total_revenue": 138.0
+  },
+  "historical_database": {
+    "available": true,
+    "transaction_rows": 530104
+  },
+  "environment": {
+    "python": "3.13.7",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "executable": "/Users/mirror/Desktop/AI-analytics-agent/.venv/bin/python",
+    "packages": {
+      "pandas": "3.0.3",
+      "numpy": "2.4.4",
+      "matplotlib": "3.11.1",
+      "scipy": "1.18.0",
+      "statsmodels": "0.14.6",
+      "streamlit": "1.57.0",
+      "python-dotenv": "1.2.3",
+      "langchain": "1.3.15",
+      "langchain-openai": "1.5.1",
+      "langgraph": "1.2.11",
+      "langsmith": "0.11.0",
+      "sqlglot": "30.23.0"
+    }
+  },
+  "source_sha256": {
+    "agent/analytics_agent.py": "6ca9ad0a0b0a0741b0abfc51506f8a5c264a8d0b2a0a9e1c45434c8dfc1af531",
+    "agent/answer_validation.py": "599b0143daca4750b1e96cfa9d804a09336fddd2855129ad51f1d32b09c9c761",
+    "agent/evidence.py": "46d5ce9bc71cd8393550cefc29a399d2a375265dceecf42eabc00681c3d15d82",
+    "agent/model_config.py": "a5d1f26b91df074230f059a5d60e651900f12d624dcec6b7524767a206f04569",
+    "agent/observability.py": "18537784b9a42ab67ccfbc1390bc7660416d670d2500c3c89663141f25929f9d",
+    "agent/workflow.py": "3eb5dc7a805ad894e694fc40f52e97f231a2eae0edbd3c063b0c1f92f04814b9",
+    "app/basic_analytics_assistant.py": "a578db22a78ea79ce3462b5f6af7cce999e1173f4f50869683937e59766ce0d0",
+    "app/streamlit_app.py": "89fe09193eae755510b2f016226fc30bb7c12ce348d22f1321ed2771aeb85dc0",
+    "tools/ab_test_tool.py": "81825c1c0e855889d7087661e5d2820a149fa6a6f123c13cf4152cf8510499ac",
+    "tools/sql_tool.py": "e2208e7ac8896069db3cc74babbcba235a2e36b0efad04b672da53b4d00ea8fd",
+    "tools/visualization_tool.py": "7eac8a6bcab368237ceca16152edda4cfce760a9711d7a15525687554edd2aed",
+    "scripts/create_database.py": "557c5dd460f1c4108cff016c3e3b944bd5941fd6dd3d9ab1e79e9c5106cfe6cf",
+    "scripts/load_docker_database.py": "d1fcb3ff4f6ce72ec77440f240f03cbd4e8692bd6e2f809de1d8d2142f5dc425",
+    "eval/eval_harness.py": "4b399b46f9a9ada13a5bb030157511b4f23f1ee62a883b9924b1649a94d813c1",
+    "requirements.txt": "bca568892133bac21d7b99e6ee5cc18fd48f527b725e31acccbe1706f12c98ba"
+  },
+  "summary": {
+    "total": 34,
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0
+  },
+  "cases": [
+    {
+      "id": "test_sql_tool",
+      "category": "original_harness",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 155.572
+    },
+    {
+      "id": "test_sql_safety",
+      "category": "original_harness",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.75
+    },
+    {
+      "id": "test_visualization_tool",
+      "category": "original_harness",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 382.916
+    },
+    {
+      "id": "test_ab_test_tool",
+      "category": "original_harness",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.206
+    },
+    {
+      "id": "country_totals",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 1.17
+    },
+    {
+      "id": "product_totals",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.637
+    },
+    {
+      "id": "customers_exclude_null",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.611
+    },
+    {
+      "id": "monthly_refunds_and_years",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.539
+    },
+    {
+      "id": "empty_result",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.49
+    },
+    {
+      "id": "keyword_inside_literal",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.35
+    },
+    {
+      "id": "keyword_inside_alias",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.39
+    },
+    {
+      "id": "leading_comment",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.394
+    },
+    {
+      "id": "readonly_cte",
+      "category": "sql_fixture",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.484
+    },
+    {
+      "id": "reject_multiple_select_statements",
+      "category": "sql_guard",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.08
+    },
+    {
+      "id": "small_uplift",
+      "category": "ab_numeric",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.133
+    },
+    {
+      "id": "strong_uplift",
+      "category": "ab_numeric",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.091
+    },
+    {
+      "id": "treatment_decline",
+      "category": "ab_numeric",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.076
+    },
+    {
+      "id": "two_sided",
+      "category": "ab_numeric",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.075
+    },
+    {
+      "id": "equal_rates",
+      "category": "ab_numeric",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.069
+    },
+    {
+      "id": "zero_total",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.008
+    },
+    {
+      "id": "negative_total",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.005
+    },
+    {
+      "id": "negative_conversions",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.005
+    },
+    {
+      "id": "conversions_exceed_total",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.004
+    },
+    {
+      "id": "fractional_conversions",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.005
+    },
+    {
+      "id": "invalid_alpha",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.005
+    },
+    {
+      "id": "zero_alpha",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.005
+    },
+    {
+      "id": "invalid_alternative",
+      "category": "ab_validation",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.005
+    },
+    {
+      "id": "zero_control_rate",
+      "category": "ab_edge",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.919
+    },
+    {
+      "id": "bar_values_and_png",
+      "category": "visualization",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 27.603
+    },
+    {
+      "id": "line_values_and_png",
+      "category": "visualization",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 27.641
+    },
+    {
+      "id": "missing_column",
+      "category": "visualization",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.482
+    },
+    {
+      "id": "empty_data",
+      "category": "visualization",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.09
+    },
+    {
+      "id": "nonnumeric_values",
+      "category": "visualization",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.3
+    },
+    {
+      "id": "filename_containment",
+      "category": "visualization",
+      "status": "passed",
+      "warnings": [],
+      "duration_ms": 0.241
+    }
+  ]
+}
