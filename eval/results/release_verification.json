@@ -1,0 +1,119 @@
+{
+  "verified_commit": "8ed15af5b72d216a2b7eb2c216b7d2ec06866699",
+  "run_id": 39103061043,
+  "url": "https://github.com/mirrorcsy0909-tech/ai-analytics-agent/actions/runs/39103061043",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "python",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes -r requirements.lock",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m unittest discover -s tests -v",
+          "conclusion": "success"
+        },
+        {
+          "name": "Frozen tool checks against a temporary synthetic database",
+          "conclusion": "success"
+        },
+        {
+          "name": "Score archived synthetic results without model calls or upload",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify new-scenario acceptance and answer-review fingerprints offline",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "container",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run docker build -t ai-analytics-agent:ci .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Start without credentials or retail data",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify the image excludes credentials and private data",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop test container",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "pull_request": "https://github.com/mirrorcsy0909-tech/ai-analytics-agent/pull/1",
+  "draft": true,
+  "recorded_at_utc": "2026-10-18T06:12:17.856737+00:00",
+  "local_offline_tests": 96,
+  "acceptance": {
+    "scenarios": 19,
+    "turns": 25,
+    "reviewer": "Codex",
+    "independent_human_review": false
+  },
+  "artifact_sha256": {
+    "eval/acceptance_v1.json": "0a120fdc48bf88dfdac721e2b9b9198dfb3710444635d98b778e4a9bb3acd075",
+    "eval/acceptance.py": "934c1bf78d49935796988bb078f2f5f23cd6f759e782978f7e50b3d6dc389734",
+    "eval/acceptance_score.py": "20d4163d3123db580f4a5a0a9929361a4e792396a20f4c5465b86ee7af735445",
+    "eval/results/acceptance_v1_first_run.json": "a7c03bbf8ea7899c32dc2fb1568cc4b851ec73f232372518cfd9db3d2a873019",
+    "eval/results/acceptance_v1_reviews.json": "c1d8207dcbba6fce34a04b8e51f81d6759df136e9a8c3ace0114a87bdb93ce71",
+    "docs/demo/index.html": "1f63f0b2616339eb069fddc741850a9c53cadb907809c95de0e073c50e3d5001",
+    "docs/demo/preview.gif": "0e097adabf7b11afceececfa2a33e97ae026e55c964e15d9ed76927c14881962"
+  }
+}

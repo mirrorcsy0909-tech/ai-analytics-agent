@@ -1,0 +1,55 @@
+name: Checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      LANGSMITH_TRACING: "false"
+      LANGCHAIN_TRACING_V2: "false"
+      ANALYTICS_LANGSMITH_TRACING: "false"
+      OPENAI_API_KEY: ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13.7"
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - run: python -m pip install --require-hashes -r requirements.lock
+      - run: python -m pip check
+      - run: python -m unittest discover -s tests -v
+      - name: Frozen tool checks against a temporary synthetic database
+        run: |
+          mkdir -p outputs
+          python -c "from pathlib import Path; from eval.phase0_baseline import create_fixture; create_fixture(Path('outputs/ci_fixture.db'))"
+          python eval/phase0_baseline.py --database outputs/ci_fixture.db --output outputs/ci_tools.json
+      - name: Score archived synthetic results without model calls or upload
+        run: python eval/phase3_evaluate.py --report eval/results/phase3_agent_workflow.json
+      - name: Verify new-scenario acceptance and answer-review fingerprints offline
+        run: python eval/acceptance_score.py --report eval/results/acceptance_v1_first_run.json --reviews eval/results/acceptance_v1_reviews.json
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t ai-analytics-agent:ci .
+      - name: Start without credentials or retail data
+        run: |
+          docker run -d --name analytics-ci -p 127.0.0.1:8000:8000 ai-analytics-agent:ci
+          for attempt in $(seq 1 30); do
+            if curl --connect-timeout 1 --max-time 3 --fail --silent http://127.0.0.1:8000/health/live; then exit 0; fi
+            sleep 2
+          done
+          docker logs analytics-ci
+          exit 1
+      - name: Verify the image excludes credentials and private data
+        run: docker exec analytics-ci python -c "from pathlib import Path; assert not Path('/app/.env').exists(); assert not Path('/app/database/analytics.db').exists(); assert not Path('/app/.git').exists(); assert not Path('/app/eval/results').exists()"
+      - name: Stop test container
+        if: always()
+        run: docker rm -f analytics-ci || true

@@ -1,0 +1,251 @@
+{
+  "started_at_utc": "2026-10-18T02:21:14.225814+00:00",
+  "scope": "Real model through FastAPI in a read-only Docker container; frozen eight-row synthetic database only; remote tracing disabled.",
+  "image": "ai-analytics-agent:phase4",
+  "cases": [
+    {
+      "id": "sql_total",
+      "question": "What is the total net revenue including refunds?",
+      "http_status": 200,
+      "duration_ms": 5755.526,
+      "response": {
+        "request_id": "7e68a09f-b87e-4baf-bbbd-dda43876bd20",
+        "status": "completed",
+        "answer": "Total net revenue, including refunds, is **138**. Currency is unspecified.",
+        "artifacts": [],
+        "metrics": {
+          "schema_version": 1,
+          "invocation_id": "7bee924c0b504038b0e9fd7195f58bab",
+          "started_at_utc": "2026-10-18T02:21:14.403849+00:00",
+          "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+          "resumed": false,
+          "status": "completed",
+          "error_type": null,
+          "model_calls": 3,
+          "tool_calls": 2,
+          "model_events": [
+            {
+              "name": "model",
+              "duration_ms": 2162.957,
+              "status": "completed",
+              "error_type": null,
+              "token_usage": {
+                "input_tokens": 1035,
+                "output_tokens": 28,
+                "total_tokens": 1063
+              }
+            },
+            {
+              "name": "model",
+              "duration_ms": 1846.48,
+              "status": "completed",
+              "error_type": null,
+              "token_usage": {
+                "input_tokens": 1222,
+                "output_tokens": 36,
+                "total_tokens": 1258
+              }
+            },
+            {
+              "name": "model",
+              "duration_ms": 1625.078,
+              "status": "completed",
+              "error_type": null,
+              "token_usage": {
+                "input_tokens": 1365,
+                "output_tokens": 69,
+                "total_tokens": 1434
+              }
+            }
+          ],
+          "tool_events": [
+            {
+              "name": "describe_retail_schema",
+              "duration_ms": 0.2,
+              "status": "completed",
+              "error_type": null
+            },
+            {
+              "name": "query_retail_database",
+              "duration_ms": 24.798,
+              "status": "completed",
+              "error_type": null
+            }
+          ],
+          "token_usage": {
+            "input_tokens": 3622,
+            "output_tokens": 133,
+            "total_tokens": 3755
+          },
+          "usage_complete": true,
+          "pending_callbacks": 0,
+          "duration_ms": 5672.085,
+          "langsmith_status": "disabled",
+          "workflow_retry_count": 0,
+          "workflow_tool_errors": 0,
+          "validation_failures": 0,
+          "local_record_status": "written"
+        }
+      },
+      "checked": true
+    },
+    {
+      "id": "chart_monthly",
+      "question": "Create a chart of monthly net revenue.",
+      "http_status": 200,
+      "duration_ms": 3157.055,
+      "response": {
+        "request_id": "d7a72973-ff05-464d-a6a2-8df6fa90224e",
+        "status": "completed",
+        "answer": "### Monthly net revenue\n\nThe chart shows net revenue by month, ordered chronologically.",
+        "artifacts": [
+          {
+            "id": "626d748b-4894-4e91-986f-e12523b3ef93",
+            "url": "/v1/analyses/d7a72973-ff05-464d-a6a2-8df6fa90224e/artifacts/626d748b-4894-4e91-986f-e12523b3ef93",
+            "label": "Chart 1"
+          }
+        ],
+        "metrics": {
+          "schema_version": 1,
+          "invocation_id": "a70b6c7e55a74cf7b0175951091c1914",
+          "started_at_utc": "2026-10-18T02:21:20.091100+00:00",
+          "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+          "resumed": false,
+          "status": "completed",
+          "error_type": null,
+          "model_calls": 2,
+          "tool_calls": 1,
+          "model_events": [
+            {
+              "name": "model",
+              "duration_ms": 1553.291,
+              "status": "completed",
+              "error_type": null,
+              "token_usage": {
+                "input_tokens": 1034,
+                "output_tokens": 50,
+                "total_tokens": 1084
+              }
+            },
+            {
+              "name": "model",
+              "duration_ms": 1524.166,
+              "status": "completed",
+              "error_type": null,
+              "token_usage": {
+                "input_tokens": 1368,
+                "output_tokens": 66,
+                "total_tokens": 1434
+              }
+            }
+          ],
+          "tool_events": [
+            {
+              "name": "create_retail_chart",
+              "duration_ms": 60.752,
+              "status": "completed",
+              "error_type": null
+            }
+          ],
+          "token_usage": {
+            "input_tokens": 2402,
+            "output_tokens": 116,
+            "total_tokens": 2518
+          },
+          "usage_complete": true,
+          "pending_callbacks": 0,
+          "duration_ms": 3146.005,
+          "langsmith_status": "disabled",
+          "workflow_retry_count": 0,
+          "workflow_tool_errors": 0,
+          "validation_failures": 0,
+          "local_record_status": "written"
+        }
+      },
+      "downloaded_png": {
+        "bytes": 37168,
+        "sha256": "5db0d67e158e900d1b344a6c1a9ed70243a3ed75e619307a184020645e6e96f4",
+        "valid_png_header": true
+      },
+      "checked": true
+    },
+    {
+      "id": "ab_zero_control",
+      "question": "Compare control 0 conversions out of 1000 users with treatment 10 out of 1000. Explain whether relative lift is defined.",
+      "http_status": 200,
+      "duration_ms": 10401.163,
+      "response": {
+        "request_id": "0ce4e900-1f48-4b40-b6e6-266236d2b4c2",
+        "status": "completed",
+        "answer": "**Result:** Control recorded 0 conversions from 1000 users, versus 10 from 1000 for treatment. Conversion rates were 0% and 1%, respectively, for an absolute lift of 1 percentage points.\n\nThe improvement is statistically significant under the prespecified treatment-greater-than-control test (p = 0.000954732582670807). The two-sided 95% confidence interval for the absolute lift is 0.4 percentage points to 1.83 percentage points.\n\n**Relative lift is undefined** because it requires dividing by the control conversion rate, which was 0%. With a zero denominator, no finite percentage lift can be calculated.\n\nBecause outcomes were sparse, Fisher’s exact test was used instead of the z approximation. The result supports higher treatment conversion, but experiment validity and practical benefit should be checked before rollout.\n\nStatistical conclusion: Evidence supports higher treatment conversion for the specified test; practical benefit and experiment validity still require review.\n\nTest: Fisher exact, alternative=larger, alpha=0.05. Interval: 95%, two-sided, newcombe_wilson.\nAssumes independent binomial outcomes; randomization and sample-ratio mismatch were not verified. Sparse observed or pooled expected counts: used Fisher exact instead of the z approximation.",
+        "artifacts": [],
+        "metrics": {
+          "schema_version": 1,
+          "invocation_id": "9a780bf4a90a4d97a8ecacf50ab90c91",
+          "started_at_utc": "2026-10-18T02:21:23.255751+00:00",
+          "scope": "One invocation; no prompt, SQL, result rows, answer or credentials stored.",
+          "resumed": false,
+          "status": "completed",
+          "error_type": null,
+          "model_calls": 2,
+          "tool_calls": 1,
+          "model_events": [
+            {
+              "name": "model",
+              "duration_ms": 1830.767,
+              "status": "completed",
+              "error_type": null,
+              "token_usage": {
+                "input_tokens": 1054,
+                "output_tokens": 73,
+                "total_tokens": 1127
+              }
+            },
+            {
+              "name": "model",
+              "duration_ms": 8546.987,
+              "status": "completed",
+              "error_type": null,
+              "token_usage": {
+                "input_tokens": 1447,
+                "output_tokens": 753,
+                "total_tokens": 2200
+              }
+            }
+          ],
+          "tool_events": [
+            {
+              "name": "run_ab_test_analysis",
+              "duration_ms": 3.788,
+              "status": "completed",
+              "error_type": null
+            }
+          ],
+          "token_usage": {
+            "input_tokens": 2501,
+            "output_tokens": 826,
+            "total_tokens": 3327
+          },
+          "usage_complete": true,
+          "pending_callbacks": 0,
+          "duration_ms": 10392.711,
+          "langsmith_status": "disabled",
+          "workflow_retry_count": 0,
+          "workflow_tool_errors": 0,
+          "validation_failures": 0,
+          "local_record_status": "written"
+        }
+      },
+      "checked": true
+    }
+  ],
+  "source_sha256": {
+    "api/main.py": "a3d2dbbcdcd5b0684856b1791044df1e98c8a64262919fb4813ecd3059c39550",
+    "requirements.lock": "4f759eaa38092b41a5e4f06c990d0039e0808efb3cef55558d1ff2205702c41d",
+    "Dockerfile": "fa15b78009504dfaf47dd35ea050551f443013acfe925a1d81a64c65045ce157"
+  },
+  "liveness_passed": true,
+  "readiness_passed": true,
+  "status": "passed",
+  "finished_at_utc": "2026-10-18T02:21:33.658490+00:00"
+}

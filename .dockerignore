@@ -1,0 +1,13 @@
+# Only runtime source and the dependency lock enter the build context.
+**
+!requirements.lock
+!agent/
+!agent/**/*.py
+!tools/
+!tools/**/*.py
+!app/
+!app/**/*.py
+!api/
+!api/**/*.py
+**/__pycache__/**
+**/*.pyc

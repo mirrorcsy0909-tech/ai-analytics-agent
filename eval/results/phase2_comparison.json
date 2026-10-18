@@ -1,0 +1,434 @@
+{
+  "benchmark": "analytics-agent-tasks-v1",
+  "benchmark_sha256": "5e3642bcab6c8f7fdd722df279459d986ecef4cdc872f58216126bc09b1df90f",
+  "review_method": "Codex final-answer and tool-evidence review, with deterministic data assertions. Same strict unit grounding requirement across phases.",
+  "model": "gpt-5.6",
+  "reasoning": {
+    "effort": "medium"
+  },
+  "api": "responses",
+  "offline_tests": {
+    "unittest": {
+      "passed": 50,
+      "failed": 0
+    },
+    "frozen_tool_checks": {
+      "passed": 34,
+      "failed": 0
+    }
+  },
+  "runs": [
+    {
+      "implementation": "legacy",
+      "file": "eval/results/phase0_agent_responses.json",
+      "scored_tasks": 12,
+      "passed": 10,
+      "failed": 2,
+      "task_success_rate": 0.8333333333333334,
+      "tool_behavior_correct": 11,
+      "mean_task_latency_ms": 4765.825,
+      "median_task_latency_ms": 4138.499,
+      "total_tokens": 19936,
+      "reviews": [
+        {
+          "id": "sql_countries",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "08e12ad0a4403015d458f63f3810552951ab859f43068de7ba9c54b2c9d0ff6e"
+        },
+        {
+          "id": "sql_products",
+          "passed": false,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": false,
+          "notes": [
+            "SQL result correctly ranks all products and revenues. Final answer adds dollar units, but the fixture and tools do not establish a currency."
+          ],
+          "answer_sha256": "e725d7546f032818c1fe87ebebac4c50e1306363d3c1cb33eebbcbbe94d12b04"
+        },
+        {
+          "id": "sql_customers",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "6666709f6492549de0fdc43769cbcbe2a606cbd12cb99e2a360b42a5ec6a55a0"
+        },
+        {
+          "id": "sql_months",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "2c64c05d642aa735a655c2afd4e61b89960e703876caca2e785e1d2297faad93"
+        },
+        {
+          "id": "sql_empty",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "469c75f958e2fbeb6a58dd561616a6e067e280644b9d754b1a5a71a805c085dd"
+        },
+        {
+          "id": "chart_monthly",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "5a7f183558983ca2f96aeed425ce9904aa67811e0609fd02a936b9aeed52435d"
+        },
+        {
+          "id": "chart_countries",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "d85c593f79f77f6796dce7c4de41a24d805d0d51dfb5956896dd5c488a43dcd8"
+        },
+        {
+          "id": "ab_small_uplift",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "fe8dbd50c859008394db30ad6da1f54b31d56d30c961a382d7f8c2614476829c"
+        },
+        {
+          "id": "ab_strong_uplift",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "eddc0f5f4d801caf694bf8c68e17874da49cbe98dcc8105f1bfe3b4e698c125c"
+        },
+        {
+          "id": "ab_missing_counts",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "e202b1a28b2e32446db070bd11f72b79941090d7e0d0bc6cfd8dc18a18314a17"
+        },
+        {
+          "id": "sql_refuse_write",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "ffc90b8bf6a4d271a181454a4d87364bf7c6cdebbbf98fe251ca4891caacb842"
+        },
+        {
+          "id": "ab_zero_control",
+          "passed": false,
+          "tool_behavior_correct": false,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Required A/B tool failed with ZeroDivisionError; explanatory text does not substitute for a successful tool result."
+          ],
+          "answer_sha256": "d2777d2409515306ff5789e278dac3f3cabe987c03f2bca3a52b5b6fb75e709d"
+        }
+      ],
+      "phase": "phase0"
+    },
+    {
+      "implementation": "workflow",
+      "file": "eval/results/phase1_agent_workflow.json",
+      "scored_tasks": 12,
+      "passed": 9,
+      "failed": 3,
+      "task_success_rate": 0.75,
+      "tool_behavior_correct": 11,
+      "mean_task_latency_ms": 4027.442,
+      "median_task_latency_ms": 3755.956,
+      "total_tokens": 20101,
+      "reviews": [
+        {
+          "id": "sql_countries",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "b02f10d6b0423e80beb8832be43d1ae611605a0d06331beea574f79e36ba6a01"
+        },
+        {
+          "id": "sql_products",
+          "passed": false,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": false,
+          "notes": [
+            "Final answer adds dollar currency units; the fixture and tool results do not establish a currency."
+          ],
+          "answer_sha256": "fa1de9b118c603f647595ac414a0a8ee58155ff614a0e5e9226a399db77575d4"
+        },
+        {
+          "id": "sql_customers",
+          "passed": false,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": false,
+          "notes": [
+            "Final answer adds dollar currency units; the fixture and tool results do not establish a currency."
+          ],
+          "answer_sha256": "e7ccab196cbd171ea1524bcb8e54f0ac7c3bca3e4874f4b60da983caa0b4ab9e"
+        },
+        {
+          "id": "sql_months",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "c6952518234f543c92212c27809882a5ce115749d954dc9e36baf05eaa603d9d"
+        },
+        {
+          "id": "sql_empty",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "469c75f958e2fbeb6a58dd561616a6e067e280644b9d754b1a5a71a805c085dd"
+        },
+        {
+          "id": "chart_monthly",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "5ff77d3e1e256505ccbd7211e90302ed3125c90fd0687624ce51a172592742b5"
+        },
+        {
+          "id": "chart_countries",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "bdafcbcf44a121f9e983ee003111de01003c498476298e0a9ae206751ad267d9"
+        },
+        {
+          "id": "ab_small_uplift",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "12bf7e3438026b096961bed5ea3dd70e6f180902883103442c77ae8f59b54029"
+        },
+        {
+          "id": "ab_strong_uplift",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "c42e95df63c1ef88124736d309356fa9f92f21d98cb002d7c7bac6e7a31c59f5"
+        },
+        {
+          "id": "ab_missing_counts",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "2ffc861b37ae0e13c9791d8667efa244abfc6695cb5a1dcf76585816974f82ec"
+        },
+        {
+          "id": "sql_refuse_write",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded tool observations and final answer meet the frozen task behavior; no unsupported factual claims found in review."
+          ],
+          "answer_sha256": "d4c709e4eafe7a68d92666dd603461b8a84d02f5a6e7052e2cbb9f11b6942499"
+        },
+        {
+          "id": "ab_zero_control",
+          "passed": false,
+          "tool_behavior_correct": false,
+          "answer_grounded_and_complete": false,
+          "notes": [
+            "Required A/B tool failed with ZeroDivisionError; explanatory text does not substitute for a successful tool result.",
+            "Workflow correctly reports failure, but the requested zero-control analysis remains incomplete."
+          ],
+          "answer_sha256": "0710044193cab1863ee81b276951a2b5427656d45c64bba820458577e635581f"
+        }
+      ],
+      "phase": "phase1"
+    },
+    {
+      "phase": "phase2",
+      "implementation": "workflow",
+      "file": "eval/results/phase2_agent_workflow.json",
+      "scored_tasks": 12,
+      "passed": 12,
+      "failed": 0,
+      "task_success_rate": 1.0,
+      "tool_behavior_correct": 12,
+      "mean_task_latency_ms": 6900.528,
+      "median_task_latency_ms": 7172.269,
+      "total_tokens": 39185,
+      "retry_count": 0,
+      "reviews": [
+        {
+          "id": "sql_countries",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Recorded totals DE=60, UK=48, US=30 and descending order match; refunds included and currency explicitly unspecified."
+          ],
+          "answer_sha256": "ae2e0e99262031f97150e41978ab2f8d02bf0ee5145ae0072576c99a67bb8f9f"
+        },
+        {
+          "id": "sql_products",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "All four product revenues and ranks match the fixture; final answer adds no unsupported currency."
+          ],
+          "answer_sha256": "9ecea5b7d441329bbad820b02f015d4b65eb19d32c0a697898e1efe086df61d3"
+        },
+        {
+          "id": "sql_customers",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Customer IDs and net revenues match; null customer excluded; no currency invented."
+          ],
+          "answer_sha256": "b8bd051c64ec605d558fb4a8029ed677be34ff290b89601bebfad35bb92a15e9"
+        },
+        {
+          "id": "sql_months",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "All four year-month totals match, including refund and cross-year ordering."
+          ],
+          "answer_sha256": "40b6b5d323398225c1ffae359d75971ba0eca8f9a836e3d24ac65ae9e35b6b67"
+        },
+        {
+          "id": "sql_empty",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "SQL returned no matching rows and answer states no transactions found without invented amounts."
+          ],
+          "answer_sha256": "90d27b0f2187b9e0db52c5bf3dddb975097582b0566454da6de4f29f1a480542"
+        },
+        {
+          "id": "chart_monthly",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Valid PNG and recorded plot rows match; stated maximum and minimum match the chart data."
+          ],
+          "answer_sha256": "943bc2c15afe178e229ed72fc6457bdfdee0a6dae4ba660738161ae58d5b39c8"
+        },
+        {
+          "id": "chart_countries",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Valid PNG and recorded country totals match the expected ranking."
+          ],
+          "answer_sha256": "c70f6600571a58966dfa7f8c17096a6833bb31c45163a6fcd067a52e862e20a8"
+        },
+        {
+          "id": "ab_small_uplift",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Correct counts, rates, lift, nonsignificant one-sided p-value and separately labeled two-sided interval."
+          ],
+          "answer_sha256": "6213201146bba0c0584b654529519db5a5428a0f6e1d0963a3aa97a5d0811a92"
+        },
+        {
+          "id": "ab_strong_uplift",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Correct counts, rates, lift, significant improvement and interval; no unsupported rollout guarantee."
+          ],
+          "answer_sha256": "46013ac612085263e86c0a09d7350a4ef815526aa823010ba5aa295c3667bfe1"
+        },
+        {
+          "id": "ab_missing_counts",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Asks for all four counts and hypothesis direction; no fabricated example test result."
+          ],
+          "answer_sha256": "e9d79fdfa895e7a93381c15e0866fdd8916b1b19b850b0c25d0e5e8061ed4399"
+        },
+        {
+          "id": "sql_refuse_write",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Refuses mutation; no analytics tools called and fixture unchanged."
+          ],
+          "answer_sha256": "88dcdd8f8405ea764b9af32ee214ed02058f5bad63047247606e9479f5e0f734"
+        },
+        {
+          "id": "ab_zero_control",
+          "passed": true,
+          "tool_behavior_correct": true,
+          "answer_grounded_and_complete": true,
+          "notes": [
+            "Tool succeeds using Fisher exact; rates and absolute lift match, relative lift explicitly undefined; assumptions and interval method are labeled."
+          ],
+          "answer_sha256": "41250404848555e12eaf91517d2b506c2972cbb1fab9ec6e04fd06d027f00670"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "One replay per phase on 12 synthetic tasks; not a production accuracy estimate.",
+    "Tools, prompts and final-answer protocol intentionally change across phases; this is a system comparison, not an isolated architecture ablation.",
+    "Claim validation checks source references, rendered values, format restrictions and declared statistical conclusions; it is not a proof of prose semantics or SQL intent correctness."
+  ]
+}
