@@ -99,4 +99,4 @@ python3 eval/phase3_evaluate.py \
 
 参考：[LangSmith 本地配置追踪](https://docs.langchain.com/langsmith/trace-without-env-vars)、[输入/输出及其他字段隐藏](https://docs.langchain.com/langsmith/mask-inputs-outputs)、[SDK evaluate 参数](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate)。
 
-Phase 4 的 FastAPI、Docker、CI 配置与本地验证已完成；GitHub Actions 的远程执行仍需后续提交和推送才会触发。
+Phase 4 的 FastAPI、Docker、CI 配置与本地验证已完成。2026-10-18 已推送独立分支并创建草稿 PR；GitHub Actions 的 Python 与 Docker 作业均已通过，见 [远程验证](https://github.com/mirrorcsy0909-tech/ai-analytics-agent/actions/runs/39103061043)。

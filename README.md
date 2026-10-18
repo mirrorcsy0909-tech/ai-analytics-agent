@@ -45,6 +45,9 @@ deterministic checks plus a separate Codex answer review; this is development
 acceptance, not an independent external benchmark. The original 12-task suite
 remains unchanged. See the [coverage, limits and reproduction steps](docs/acceptance.md).
 The complete local offline suite now passes **96/96 tests**.
+GitHub Actions also passed the Python checks and Docker smoke checks on
+2026-10-18: [verified run](https://github.com/mirrorcsy0909-tech/ai-analytics-agent/actions/runs/39103061043).
+The complete upgrade is available for review in [draft PR #1](https://github.com/mirrorcsy0909-tech/ai-analytics-agent/pull/1).
 
 ## Run locally
 

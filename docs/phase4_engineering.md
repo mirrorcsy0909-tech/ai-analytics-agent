@@ -92,7 +92,7 @@ uv pip compile requirements.txt --universal --python-version 3.13 \
 
 `.github/workflows/ci.yml` 配置两个 GitHub Actions 作业：Python 安装与测试，以及 Docker 构建与无凭据启动。权限为 contents:read，不使用真实密钥或数据，不做部署或镜像推送。工具基线使用临时八行合成库，原十二题归档评分调用 LangSmith SDK 的本地模式，不调用模型或上传。
 
-当前只有本地与 Docker 中的验证记录；**尚未提交/推送代码，GitHub Actions 未实际触发**。远程流水线结果应在用户后续推送后查看。
+2026-10-18 已将完整升级推送至 `codex/analytics-agent-2-acceptance`，并创建 [草稿 PR #1](https://github.com/mirrorcsy0909-tech/ai-analytics-agent/pull/1)。[GitHub Actions](https://github.com/mirrorcsy0909-tech/ai-analytics-agent/actions/runs/39103061043) 的 Python 与 Docker 两个作业均已通过：锁定依赖安装、离线测试、固定工具检查、归档评测、新验收指纹验证，以及无凭据容器启动和私密文件排除。下文保留本阶段最初的本地验证记录；最新验收见 [新场景验收](acceptance.md)。
 
 ## 本阶段验证
 
